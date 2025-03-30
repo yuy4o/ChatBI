@@ -1,0 +1,5 @@
+/.idea/
+/backend/chroma_db/
+/backend/.idea/
+/backend/.vscode/
+/backend/*.db

@@ -1,0 +1,37 @@
+[
+    {
+        "key": "llm_api_key",
+        "value": "02fb5cc3-e828-436e-a1b6-c114916c15c6",
+        "name": "大模型API密钥"
+    },
+    {
+        "key": "llm_base_url",
+        "value": "https://ark.cn-beijing.volces.com/api/v3",
+        "name": "大模型接入点"
+    },
+    {
+        "key": "llm_model",
+        "value": "deepseek-v3-250324",
+        "name": "大模型名称"
+    },
+    {
+        "key": "llm_timeout",
+        "value": "1800",
+        "name": "大模型超时时间(秒)"
+    },
+    {
+        "key": "embedding_api_key",
+        "value": "02fb5cc3-e828-436e-a1b6-c114916c15c6",
+        "name": "向量化API密钥"
+    },
+    {
+        "key": "embedding_api_url",
+        "value": "https://ark.cn-beijing.volces.com/api/v3/embeddings",
+        "name": "向量化接入点"
+    },
+    {
+        "key": "embedding_model",
+        "value": "doubao-embedding-text-240715",
+        "name": "向量化模型名称"
+    }
+]

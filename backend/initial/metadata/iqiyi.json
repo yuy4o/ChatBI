@@ -1,0 +1,474 @@
+{
+    "name": "iqiyi_video",
+    "description": "爱奇艺视频业务（模拟）",
+    "tables": [
+        {
+            "name": "video_play_logs",
+            "type": "fact",
+            "description": "视频播放日志表",
+            "columns": [
+                {
+                    "name": "log_id",
+                    "type": "BIGINT",
+                    "description": "日志ID",
+                    "is_primary": true
+                },
+                {
+                    "name": "user_id",
+                    "type": "BIGINT",
+                    "description": "用户ID"
+                },
+                {
+                    "name": "video_id",
+                    "type": "BIGINT",
+                    "description": "视频ID",
+                    "is_primary": true
+                },
+                {
+                    "name": "device_id",
+                    "type": "VARCHAR(100)",
+                    "description": "设备ID",
+                    "is_primary": true
+                },
+                {
+                    "name": "start_time",
+                    "type": "TIMESTAMP",
+                    "description": "开始播放时间"
+                },
+                {
+                    "name": "end_time",
+                    "type": "TIMESTAMP",
+                    "description": "结束播放时间"
+                },
+                {
+                    "name": "duration",
+                    "type": "INT",
+                    "description": "duration"
+                },
+                {
+                    "name": "video_duration",
+                    "type": "INT",
+                    "description": "视频总时长(秒)"
+                },
+                {
+                    "name": "playback_quality",
+                    "type": "ENUM",
+                    "description": "播放质量",
+                    "values": [
+                        {
+                            "value": "240p",
+                            "description": "流畅"
+                        },
+                        {
+                            "value": "360p",
+                            "description": "标清"
+                        },
+                        {
+                            "value": "480p",
+                            "description": "高清"
+                        },
+                        {
+                            "value": "720p",
+                            "description": "超清"
+                        },
+                        {
+                            "value": "1080p",
+                            "description": "蓝光"
+                        }
+                    ]
+                },
+                {
+                    "name": "network_type",
+                    "type": "ENUM",
+                    "description": "网络类型",
+                    "values": [
+                        {
+                            "value": "wifi",
+                            "description": "WiFi"
+                        },
+                        {
+                            "value": "4g",
+                            "description": "4G"
+                        },
+                        {
+                            "value": "5g",
+                            "description": "5G"
+                        }
+                    ]
+                },
+                {
+                    "name": "device_type",
+                    "type": "ENUM",
+                    "description": "设备类型",
+                    "values": [
+                        {
+                            "value": "mobile",
+                            "description": "手机"
+                        },
+                        {
+                            "value": "tablet",
+                            "description": "平板"
+                        },
+                        {
+                            "value": "pc",
+                            "description": "电脑"
+                        },
+                        {
+                            "value": "tv",
+                            "description": "电视"
+                        },
+                        {
+                            "value": "other",
+                            "description": "其他"
+                        }
+                    ]
+                },
+                {
+                    "name": "app_version",
+                    "type": "VARCHAR(20)",
+                    "description": "应用版本"
+                },
+                {
+                    "name": "dt",
+                    "type": "VARCHAR(50)",
+                    "description": "日期分区"
+                }
+            ]
+        },
+        {
+            "name": "video_creators",
+            "type": "dim_dt",
+            "description": "视频发布用户表",
+            "columns": [
+                {
+                    "name": "creator_id",
+                    "type": "BIGINT",
+                    "description": "创作者ID",
+                    "is_primary": true
+                },
+                {
+                    "name": "username",
+                    "type": "VARCHAR(50)",
+                    "description": "用户名"
+                },
+                {
+                    "name": "nickname",
+                    "type": "VARCHAR(50)",
+                    "description": "昵称"
+                },
+                {
+                    "name": "avatar_url",
+                    "type": "VARCHAR(255)",
+                    "description": "头像URL"
+                },
+                {
+                    "name": "bio",
+                    "type": "TEXT",
+                    "description": "个人简介"
+                },
+                {
+                    "name": "verification_status",
+                    "type": "ENUM",
+                    "description": "认证状态",
+                    "values": [
+                        {
+                            "value": "unverified",
+                            "description": "未认证"
+                        },
+                        {
+                            "value": "verified",
+                            "description": "已认证"
+                        },
+                        {
+                            "value": "enterprise",
+                            "description": "企业认证"
+                        }
+                    ]
+                },
+                {
+                    "name": "followers_count",
+                    "type": "INT",
+                    "description": "粉丝数"
+                },
+                {
+                    "name": "following_count",
+                    "type": "INT",
+                    "description": "关注数"
+                },
+                {
+                    "name": "video_count",
+                    "type": "INT",
+                    "description": "发布视频数"
+                },
+                {
+                    "name": "total_likes",
+                    "type": "BIGINT",
+                    "description": "获赞总数"
+                },
+                {
+                    "name": "level",
+                    "type": "ENUM",
+                    "description": "用户等级",
+                    "values": [
+                        {
+                            "value": "1",
+                            "description": "一级"
+                        },
+                        {
+                            "value": "2",
+                            "description": "二级"
+                        },
+                        {
+                            "value": "3",
+                            "description": "三级"
+                        },
+                        {
+                            "value": "4",
+                            "description": "四级"
+                        },
+                        {
+                            "value": "5",
+                            "description": "五级"
+                        }
+                    ]
+                },
+                {
+                    "name": "registration_date",
+                    "type": "TIMESTAMP",
+                    "description": "注册时间"
+                },
+                {
+                    "name": "status",
+                    "type": "ENUM",
+                    "description": "账号状态",
+                    "values": [
+                        {
+                            "value": "active",
+                            "description": "正常"
+                        },
+                        {
+                            "value": "suspended",
+                            "description": "暂停"
+                        },
+                        {
+                            "value": "banned",
+                            "description": "封禁"
+                        }
+                    ]
+                },
+                {
+                    "name": "dt",
+                    "type": "VARCHAR(50)",
+                    "description": "日期分区"
+                }
+            ]
+        },
+        {
+            "name": "videos",
+            "type": "dim_dt",
+            "description": "视频内容表",
+            "columns": [
+                {
+                    "name": "video_id",
+                    "type": "BIGINT",
+                    "description": "视频ID",
+                    "is_primary": true
+                },
+                {
+                    "name": "creator_id",
+                    "type": "BIGINT",
+                    "description": "创作者ID (外键)"
+                },
+                {
+                    "name": "title",
+                    "type": "VARCHAR(200)",
+                    "description": "视频标题"
+                },
+                {
+                    "name": "description",
+                    "type": "TEXT",
+                    "description": "视频描述"
+                },
+                {
+                    "name": "cover_url",
+                    "type": "VARCHAR(255)",
+                    "description": "封面图URL"
+                },
+                {
+                    "name": "video_url",
+                    "type": "VARCHAR(255)",
+                    "description": "视频URL"
+                },
+                {
+                    "name": "duration",
+                    "type": "INT",
+                    "description": "视频时长(秒)"
+                },
+                {
+                    "name": "category",
+                    "type": "ENUM",
+                    "description": "视频分类",
+                    "values": [
+                        {
+                            "value": "entertainment",
+                            "description": "娱乐"
+                        },
+                        {
+                            "value": "education",
+                            "description": "教育"
+                        },
+                        {
+                            "value": "sports",
+                            "description": "体育"
+                        },
+                        {
+                            "value": "technology",
+                            "description": "科技"
+                        },
+                        {
+                            "value": "lifestyle",
+                            "description": "生活"
+                        },
+                        {
+                            "value": "gaming",
+                            "description": "游戏"
+                        },
+                        {
+                            "value": "music",
+                            "description": "音乐"
+                        },
+                        {
+                            "value": "news",
+                            "description": "新闻"
+                        },
+                        {
+                            "value": "other",
+                            "description": "其他"
+                        }
+                    ]
+                },
+                {
+                    "name": "tags",
+                    "type": "VARCHAR(500)",
+                    "description": "视频标签(逗号分隔)"
+                },
+                {
+                    "name": "status",
+                    "type": "ENUM",
+                    "description": "视频状态",
+                    "values": [
+                        {
+                            "value": "draft",
+                            "description": "草稿"
+                        },
+                        {
+                            "value": "processing",
+                            "description": "处理中"
+                        },
+                        {
+                            "value": "published",
+                            "description": "已发布"
+                        },
+                        {
+                            "value": "blocked",
+                            "description": "已封禁"
+                        }
+                    ]
+                },
+                {
+                    "name": "visibility",
+                    "type": "ENUM",
+                    "description": "可见性",
+                    "values": [
+                        {
+                            "value": "public",
+                            "description": "公开"
+                        },
+                        {
+                            "value": "private",
+                            "description": "私密"
+                        },
+                        {
+                            "value": "unlisted",
+                            "description": "未列出"
+                        }
+                    ]
+                },
+                {
+                    "name": "published_at",
+                    "type": "TIMESTAMP",
+                    "description": "发布时间"
+                }
+            ]
+        },
+        {
+            "name": "video_interactions",
+            "type": "fact",
+            "description": "视频互动表",
+            "columns": [
+                {
+                    "name": "interaction_id",
+                    "type": "BIGINT",
+                    "description": "互动ID",
+                    "is_primary": true
+                },
+                {
+                    "name": "video_id",
+                    "type": "BIGINT",
+                    "description": "视频ID"
+                },
+                {
+                    "name": "user_id",
+                    "type": "BIGINT",
+                    "description": "用户ID"
+                },
+                {
+                    "name": "interaction_type",
+                    "type": "ENUM",
+                    "description": "互动类型",
+                    "values": [
+                        {
+                            "value": "like",
+                            "description": "点赞"
+                        },
+                        {
+                            "value": "dislike",
+                            "description": "点踩"
+                        },
+                        {
+                            "value": "comment",
+                            "description": "评论"
+                        },
+                        {
+                            "value": "share",
+                            "description": "分享"
+                        },
+                        {
+                            "value": "favorite",
+                            "description": "收藏"
+                        },
+                        {
+                            "value": "report",
+                            "description": "举报"
+                        }
+                    ]
+                },
+                {
+                    "name": "content",
+                    "type": "TEXT",
+                    "description": "互动内容(评论内容)"
+                },
+                {
+                    "name": "device_id",
+                    "type": "VARCHAR(100)",
+                    "description": "设备ID"
+                },
+                {
+                    "name": "dt",
+                    "type": "VARCHAR(50)",
+                    "description": "日期分区"
+                }
+            ]
+        }
+    ]
+}

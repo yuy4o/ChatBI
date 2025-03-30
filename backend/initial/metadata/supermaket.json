@@ -1,0 +1,1795 @@
+{
+    "name": "business",
+    "description": "沃尔玛超市业务（模拟）",
+    "tables":
+    [
+        {
+            "name": "Products",
+            "description": "产品数据表",
+            "columns":
+            [
+                {
+                    "name": "product_id",
+                    "type": "INT",
+                    "description": "商品ID (主键)"
+                },
+                {
+                    "name": "barcode",
+                    "type": "VARCHAR(30)",
+                    "description": "商品条形码"
+                },
+                {
+                    "name": "product_name",
+                    "type": "VARCHAR(100)",
+                    "description": "商品名称"
+                },
+                {
+                    "name": "brand_id",
+                    "type": "INT",
+                    "description": "品牌ID (外键)"
+                },
+                {
+                    "name": "category_id",
+                    "type": "INT",
+                    "description": "分类ID (外键)"
+                },
+                {
+                    "name": "subcategory_id",
+                    "type": "INT",
+                    "description": "子分类ID (外键)"
+                },
+                {
+                    "name": "supplier_id",
+                    "type": "INT",
+                    "description": "供应商ID (外键)"
+                },
+                {
+                    "name": "unit_price",
+                    "type": "DECIMAL(10,2)",
+                    "description": "单价"
+                },
+                {
+                    "name": "cost_price",
+                    "type": "DECIMAL(10,2)",
+                    "description": "成本价"
+                },
+                {
+                    "name": "discount_price",
+                    "type": "DECIMAL(10,2)",
+                    "description": "折扣价"
+                },
+                {
+                    "name": "stock_quantity",
+                    "type": "INT",
+                    "description": "库存数量"
+                },
+                {
+                    "name": "min_stock_level",
+                    "type": "INT",
+                    "description": "最低库存水平"
+                },
+                {
+                    "name": "shelf_location",
+                    "type": "VARCHAR(50)",
+                    "description": "货架位置"
+                },
+                {
+                    "name": "weight",
+                    "type": "DECIMAL(8,2)",
+                    "description": "重量(克)"
+                },
+                {
+                    "name": "volume",
+                    "type": "DECIMAL(8,2)",
+                    "description": "体积"
+                },
+                {
+                    "name": "expiration_days",
+                    "type": "INT",
+                    "description": "保质期天数"
+                },
+                {
+                    "name": "is_perishable",
+                    "type": "BOOLEAN",
+                    "description": "是否易腐品"
+                },
+                {
+                    "name": "is_imported",
+                    "type": "BOOLEAN",
+                    "description": "是否进口"
+                },
+                {
+                    "name": "tax_rate",
+                    "type": "DECIMAL(5,2)",
+                    "description": "税率"
+                },
+                {
+                    "name": "description",
+                    "type": "TEXT",
+                    "description": "商品描述"
+                },
+                {
+                    "name": "image_url",
+                    "type": "VARCHAR(255)",
+                    "description": "商品图片URL"
+                },
+                {
+                    "name": "status",
+                    "type": "ENUM",
+                    "description": "商品状态",
+                    "values":
+                    [
+                        {
+                            "value": "active",
+                            "description": "商品在售"
+                        },
+                        {
+                            "value": "discontinued",
+                            "description": "商品已下架"
+                        },
+                        {
+                            "value": "out_of_stock",
+                            "description": "商品缺货"
+                        },
+                        {
+                            "value": "coming_soon",
+                            "description": "商品即将上架"
+                        },
+                        {
+                            "value": "seasonal",
+                            "description": "季节性商品"
+                        },
+                        {
+                            "value": "clearance",
+                            "description": "清仓商品"
+                        },
+                        {
+                            "value": "limited_edition",
+                            "description": "限量版商品"
+                        },
+                        {
+                            "value": "recalled",
+                            "description": "召回商品"
+                        }
+                    ]
+                },
+                {
+                    "name": "storage_type",
+                    "type": "ENUM",
+                    "description": "存储类型",
+                    "values":
+                    [
+                        {
+                            "value": "room_temperature",
+                            "description": "常温存储"
+                        },
+                        {
+                            "value": "refrigerated",
+                            "description": "冷藏存储"
+                        },
+                        {
+                            "value": "frozen",
+                            "description": "冷冻存储"
+                        },
+                        {
+                            "value": "special_care",
+                            "description": "特殊存储"
+                        },
+                        {
+                            "value": "hazardous",
+                            "description": "危险品存储"
+                        },
+                        {
+                            "value": "fragile",
+                            "description": "易碎品存储"
+                        }
+                    ]
+                },
+                {
+                    "name": "packaging_type",
+                    "type": "ENUM",
+                    "description": "包装类型",
+                    "values":
+                    [
+                        {
+                            "value": "box",
+                            "description": "盒装"
+                        },
+                        {
+                            "value": "bottle",
+                            "description": "瓶装"
+                        },
+                        {
+                            "value": "can",
+                            "description": "罐装"
+                        },
+                        {
+                            "value": "pouch",
+                            "description": "袋装"
+                        },
+                        {
+                            "value": "bag",
+                            "description": "袋装"
+                        },
+                        {
+                            "value": "jar",
+                            "description": "罐装"
+                        },
+                        {
+                            "value": "tube",
+                            "description": "管装"
+                        },
+                        {
+                            "value": "loose",
+                            "description": "散装"
+                        },
+                        {
+                            "value": "wrapped",
+                            "description": "包装"
+                        },
+                        {
+                            "value": "vacuum_sealed",
+                            "description": "真空包装"
+                        },
+                        {
+                            "value": "blister_pack",
+                            "description": "泡罩包装"
+                        }
+                    ]
+                },
+                {
+                    "name": "age_restriction",
+                    "type": "ENUM",
+                    "description": "年龄限制",
+                    "values":
+                    [
+                        {
+                            "value": "none",
+                            "description": "无限制"
+                        },
+                        {
+                            "value": "16+",
+                            "description": "16岁以上"
+                        },
+                        {
+                            "value": "18+",
+                            "description": "18岁以上"
+                        },
+                        {
+                            "value": "21+",
+                            "description": "21岁以上"
+                        }
+                    ]
+                },
+                {
+                    "name": "popularity",
+                    "type": "ENUM",
+                    "description": "受欢迎程度",
+                    "values":
+                    [
+                        {
+                            "value": "low",
+                            "description": "低"
+                        },
+                        {
+                            "value": "medium",
+                            "description": "中"
+                        },
+                        {
+                            "value": "high",
+                            "description": "高"
+                        },
+                        {
+                            "value": "bestseller",
+                            "description": "畅销"
+                        },
+                        {
+                            "value": "trending",
+                            "description": "热门"
+                        },
+                        {
+                            "value": "seasonal_favorite",
+                            "description": "季节性热门"
+                        }
+                    ]
+                },
+                {
+                    "name": "created_at",
+                    "type": "TIMESTAMP",
+                    "description": "创建时间"
+                },
+                {
+                    "name": "updated_at",
+                    "type": "TIMESTAMP",
+                    "description": "更新时间"
+                }
+            ]
+        },
+        {
+            "name": "Orders",
+            "description": "订单数据表",
+            "columns":
+            [
+                {
+                    "name": "order_id",
+                    "type": "INT",
+                    "description": "订单ID (主键)"
+                },
+                {
+                    "name": "customer_id",
+                    "type": "INT",
+                    "description": "顾客ID (外键)"
+                },
+                {
+                    "name": "cashier_id",
+                    "type": "INT",
+                    "description": "收银员ID (外键)"
+                },
+                {
+                    "name": "store_id",
+                    "type": "INT",
+                    "description": "门店ID (外键)"
+                },
+                {
+                    "name": "order_number",
+                    "type": "VARCHAR(20)",
+                    "description": "订单编号"
+                },
+                {
+                    "name": "order_date",
+                    "type": "DATETIME",
+                    "description": "下单日期时间"
+                },
+                {
+                    "name": "payment_method",
+                    "type": "ENUM",
+                    "description": "支付方式",
+                    "values":
+                    [
+                        {
+                            "value": "cash",
+                            "value_description": "现金"
+                        },
+                        {
+                            "value": "credit_card",
+                            "value_description": "信用卡"
+                        },
+                        {
+                            "value": "debit_card",
+                            "value_description": "借记卡"
+                        },
+                        {
+                            "value": "wechat_pay",
+                            "value_description": "微信支付"
+                        },
+                        {
+                            "value": "alipay",
+                            "value_description": "支付宝"
+                        },
+                        {
+                            "value": "apple_pay",
+                            "value_description": "Apple Pay"
+                        },
+                        {
+                            "value": "google_pay",
+                            "value_description": "Google Pay"
+                        },
+                        {
+                            "value": "bank_transfer",
+                            "value_description": "银行转账"
+                        },
+                        {
+                            "value": "store_credit",
+                            "value_description": "店铺信用"
+                        },
+                        {
+                            "value": "gift_card",
+                            "value_description": "礼品卡"
+                        },
+                        {
+                            "value": "mixed",
+                            "value_description": "混合支付"
+                        },
+                        {
+                            "value": "installment",
+                            "value_description": "分期付款"
+                        },
+                        {
+                            "value": "cod",
+                            "value_description": "货到付款"
+                        }
+                    ]
+                },
+                {
+                    "name": "payment_status",
+                    "type": "ENUM",
+                    "description": "支付状态",
+                    "values":
+                    [
+                        {
+                            "value": "pending",
+                            "value_description": "待支付"
+                        },
+                        {
+                            "value": "processing",
+                            "value_description": "处理中"
+                        },
+                        {
+                            "value": "paid",
+                            "value_description": "已支付"
+                        },
+                        {
+                            "value": "partially_paid",
+                            "value_description": "部分支付"
+                        },
+                        {
+                            "value": "failed",
+                            "value_description": "支付失败"
+                        },
+                        {
+                            "value": "refunded",
+                            "value_description": "已退款"
+                        },
+                        {
+                            "value": "partially_refunded",
+                            "value_description": "部分退款"
+                        },
+                        {
+                            "value": "cancelled",
+                            "value_description": "已取消"
+                        },
+                        {
+                            "value": "chargeback",
+                            "value_description": "退单"
+                        },
+                        {
+                            "value": "authorized",
+                            "value_description": "已授权"
+                        }
+                    ]
+                },
+                {
+                    "name": "order_status",
+                    "type": "ENUM",
+                    "description": "订单状态",
+                    "values":
+                    [
+                        {
+                            "value": "new",
+                            "value_description": "新订单"
+                        },
+                        {
+                            "value": "processing",
+                            "value_description": "处理中"
+                        },
+                        {
+                            "value": "ready_for_pickup",
+                            "value_description": "准备取货"
+                        },
+                        {
+                            "value": "shipped",
+                            "value_description": "已发货"
+                        },
+                        {
+                            "value": "delivered",
+                            "value_description": "已送达"
+                        },
+                        {
+                            "value": "completed",
+                            "value_description": "已完成"
+                        },
+                        {
+                            "value": "cancelled",
+                            "value_description": "已取消"
+                        },
+                        {
+                            "value": "on_hold",
+                            "value_description": "暂停"
+                        },
+                        {
+                            "value": "returned",
+                            "value_description": "已退货"
+                        },
+                        {
+                            "value": "partially_returned",
+                            "value_description": "部分退货"
+                        },
+                        {
+                            "value": "disputed",
+                            "value_description": "争议中"
+                        },
+                        {
+                            "value": "refunded",
+                            "value_description": "已退款"
+                        }
+                    ]
+                },
+                {
+                    "name": "order_type",
+                    "type": "ENUM",
+                    "description": "订单类型",
+                    "values":
+                    [
+                        {
+                            "value": "in_store",
+                            "value_description": "店内订单"
+                        },
+                        {
+                            "value": "online",
+                            "value_description": "线上订单"
+                        },
+                        {
+                            "value": "phone",
+                            "value_description": "电话订单"
+                        },
+                        {
+                            "value": "wholesale",
+                            "value_description": "批发订单"
+                        },
+                        {
+                            "value": "employee_purchase",
+                            "value_description": "员工购买"
+                        },
+                        {
+                            "value": "gift",
+                            "value_description": "礼品订单"
+                        },
+                        {
+                            "value": "subscription",
+                            "value_description": "订阅订单"
+                        },
+                        {
+                            "value": "pickup",
+                            "value_description": "自提订单"
+                        },
+                        {
+                            "value": "delivery",
+                            "value_description": "配送订单"
+                        }
+                    ]
+                },
+                {
+                    "name": "priority",
+                    "type": "ENUM",
+                    "description": "订单优先级",
+                    "values":
+                    [
+                        {
+                            "value": "low",
+                            "value_description": "低"
+                        },
+                        {
+                            "value": "normal",
+                            "value_description": "正常"
+                        },
+                        {
+                            "value": "high",
+                            "value_description": "高"
+                        },
+                        {
+                            "value": "urgent",
+                            "value_description": "紧急"
+                        },
+                        {
+                            "value": "vip",
+                            "value_description": "VIP"
+                        }
+                    ]
+                },
+                {
+                    "name": "subtotal",
+                    "type": "DECIMAL(10,2)",
+                    "description": "小计金额"
+                },
+                {
+                    "name": "tax_amount",
+                    "type": "DECIMAL(10,2)",
+                    "description": "税额"
+                },
+                {
+                    "name": "discount_amount",
+                    "type": "DECIMAL(10,2)",
+                    "description": "折扣金额"
+                },
+                {
+                    "name": "total_amount",
+                    "type": "DECIMAL(10,2)",
+                    "description": "总金额"
+                },
+                {
+                    "name": "points_earned",
+                    "type": "INT",
+                    "description": "获得积分"
+                },
+                {
+                    "name": "points_redeemed",
+                    "type": "INT",
+                    "description": "使用积分"
+                },
+                {
+                    "name": "coupon_code",
+                    "type": "VARCHAR(30)",
+                    "description": "优惠券代码"
+                },
+                {
+                    "name": "notes",
+                    "type": "TEXT",
+                    "description": "订单备注"
+                },
+                {
+                    "name": "return_reason",
+                    "type": "TEXT",
+                    "description": "退货原因"
+                },
+                {
+                    "name": "is_online_order",
+                    "type": "BOOLEAN",
+                    "description": "是否线上订单"
+                },
+                {
+                    "name": "delivery_address_id",
+                    "type": "INT",
+                    "description": "配送地址ID (外键)"
+                },
+                {
+                    "name": "delivery_fee",
+                    "type": "DECIMAL(6,2)",
+                    "description": "配送费"
+                },
+                {
+                    "name": "delivery_status",
+                    "type": "ENUM",
+                    "description": "配送状态",
+                    "values":
+                    [
+                        {
+                            "value": "pending",
+                            "value_description": "待处理"
+                        },
+                        {
+                            "value": "processing",
+                            "value_description": "处理中"
+                        },
+                        {
+                            "value": "packed",
+                            "value_description": "已打包"
+                        },
+                        {
+                            "value": "shipped",
+                            "value_description": "已发货"
+                        },
+                        {
+                            "value": "in_transit",
+                            "value_description": "运输中"
+                        },
+                        {
+                            "value": "out_for_delivery",
+                            "value_description": "配送中"
+                        },
+                        {
+                            "value": "delivered",
+                            "value_description": "已送达"
+                        },
+                        {
+                            "value": "failed",
+                            "value_description": "配送失败"
+                        },
+                        {
+                            "value": "returned_to_sender",
+                            "value_description": "退回发货人"
+                        },
+                        {
+                            "value": "delayed",
+                            "value_description": "延迟"
+                        }
+                    ]
+                },
+                {
+                    "name": "delivery_method",
+                    "type": "ENUM",
+                    "description": "配送方式",
+                    "values":
+                    [
+                        {
+                            "value": "standard",
+                            "value_description": "标准配送"
+                        },
+                        {
+                            "value": "express",
+                            "value_description": "快递"
+                        },
+                        {
+                            "value": "same_day",
+                            "value_description": "当天配送"
+                        },
+                        {
+                            "value": "next_day",
+                            "value_description": "次日配送"
+                        },
+                        {
+                            "value": "pickup_in_store",
+                            "value_description": "店内自提"
+                        },
+                        {
+                            "value": "digital",
+                            "value_description": "数字配送"
+                        },
+                        {
+                            "value": "special_handling",
+                            "value_description": "特殊处理"
+                        },
+                        {
+                            "value": "international",
+                            "value_description": "国际配送"
+                        },
+                        {
+                            "value": "freight",
+                            "value_description": "货运"
+                        }
+                    ]
+                },
+                {
+                    "name": "expected_delivery_date",
+                    "type": "DATE",
+                    "description": "预计配送日期"
+                },
+                {
+                    "name": "actual_delivery_date",
+                    "type": "DATE",
+                    "description": "实际配送日期"
+                },
+                {
+                    "name": "invoice_number",
+                    "type": "VARCHAR(30)",
+                    "description": "发票号码"
+                },
+                {
+                    "name": "invoice_type",
+                    "type": "ENUM",
+                    "description": "发票类型",
+                    "values":
+                    [
+                        {
+                            "value": "regular",
+                            "value_description": "普通发票"
+                        },
+                        {
+                            "value": "vat",
+                            "value_description": "增值税发票"
+                        },
+                        {
+                            "value": "electronic",
+                            "value_description": "电子发票"
+                        },
+                        {
+                            "value": "special",
+                            "value_description": "特殊发票"
+                        },
+                        {
+                            "value": "none",
+                            "value_description": "无发票"
+                        }
+                    ]
+                },
+                {
+                    "name": "created_at",
+                    "type": "TIMESTAMP",
+                    "description": "创建时间"
+                },
+                {
+                    "name": "updated_at",
+                    "type": "TIMESTAMP",
+                    "description": "更新时间"
+                }
+            ]
+        },
+        {
+            "name": "OrderDetails",
+            "description": "订单详情数据表",
+            "columns":
+            [
+                {
+                    "name": "order_detail_id",
+                    "type": "INT",
+                    "description": "订单明细 ID (主键)"
+                },
+                {
+                    "name": "order_id",
+                    "type": "INT",
+                    "description": "订单 ID (外键)"
+                },
+                {
+                    "name": "product_id",
+                    "type": "INT",
+                    "description": "商品 ID (外键)"
+                },
+                {
+                    "name": "quantity",
+                    "type": "INT",
+                    "description": "数量"
+                },
+                {
+                    "name": "unit_price",
+                    "type": "DECIMAL(10,2)",
+                    "description": "单价"
+                },
+                {
+                    "name": "discount_amount",
+                    "type": "DECIMAL(10,2)",
+                    "description": "折扣金额"
+                },
+                {
+                    "name": "discount_type",
+                    "type": "ENUM",
+                    "description": "折扣类型",
+                    "values":
+                    [
+                        {
+                            "value": "none",
+                            "description": "无折扣"
+                        },
+                        {
+                            "value": "percentage",
+                            "description": "百分比折扣"
+                        },
+                        {
+                            "value": "fixed_amount",
+                            "description": "固定金额折扣"
+                        },
+                        {
+                            "value": "buy_one_get_one",
+                            "description": "买一送一"
+                        },
+                        {
+                            "value": "bundle",
+                            "description": "捆绑销售"
+                        },
+                        {
+                            "value": "clearance",
+                            "description": "清仓折扣"
+                        },
+                        {
+                            "value": "member",
+                            "description": "会员折扣"
+                        },
+                        {
+                            "value": "seasonal",
+                            "description": "季节性折扣"
+                        },
+                        {
+                            "value": "staff",
+                            "description": "员工折扣"
+                        },
+                        {
+                            "value": "loyalty",
+                            "description": "忠诚度折扣"
+                        },
+                        {
+                            "value": "coupon",
+                            "description": "优惠券"
+                        }
+                    ]
+                },
+                {
+                    "name": "tax_amount",
+                    "type": "DECIMAL(10,2)",
+                    "description": "税额"
+                },
+                {
+                    "name": "subtotal",
+                    "type": "DECIMAL(10,2)",
+                    "description": "小计金额"
+                },
+                {
+                    "name": "is_returned",
+                    "type": "BOOLEAN",
+                    "description": "是否已退货"
+                },
+                {
+                    "name": "returned_quantity",
+                    "type": "INT",
+                    "description": "退货数量"
+                },
+                {
+                    "name": "return_reason",
+                    "type": "VARCHAR(255)",
+                    "description": "退货原因"
+                },
+                {
+                    "name": "return_status",
+                    "type": "ENUM",
+                    "description": "退货状态",
+                    "values":
+                    [
+                        {
+                            "value": "pending",
+                            "description": "待处理"
+                        },
+                        {
+                            "value": "approved",
+                            "description": "已批准"
+                        },
+                        {
+                            "value": "rejected",
+                            "description": "已拒绝"
+                        },
+                        {
+                            "value": "processing",
+                            "description": "处理中"
+                        },
+                        {
+                            "value": "completed",
+                            "description": "已完成"
+                        },
+                        {
+                            "value": "cancelled",
+                            "description": "已取消"
+                        }
+                    ]
+                },
+                {
+                    "name": "return_condition",
+                    "type": "ENUM",
+                    "description": "退货商品状态",
+                    "values":
+                    [
+                        {
+                            "value": "unopened",
+                            "description": "未开封"
+                        },
+                        {
+                            "value": "opened",
+                            "description": "已开封"
+                        },
+                        {
+                            "value": "damaged",
+                            "description": "损坏"
+                        },
+                        {
+                            "value": "defective",
+                            "description": "有缺陷"
+                        },
+                        {
+                            "value": "wrong_item",
+                            "description": "错误商品"
+                        },
+                        {
+                            "value": "expired",
+                            "description": "过期"
+                        }
+                    ]
+                },
+                {
+                    "name": "return_date",
+                    "type": "DATETIME",
+                    "description": "退货日期"
+                },
+                {
+                    "name": "promotion_id",
+                    "type": "INT",
+                    "description": "促销活动 ID (外键)"
+                },
+                {
+                    "name": "gift_wrap",
+                    "type": "ENUM",
+                    "description": "礼品包装",
+                    "values":
+                    [
+                        {
+                            "value": "none",
+                            "description": "无包装"
+                        },
+                        {
+                            "value": "standard",
+                            "description": "标准包装"
+                        },
+                        {
+                            "value": "premium",
+                            "description": "高级包装"
+                        },
+                        {
+                            "value": "holiday",
+                            "description": "节日包装"
+                        },
+                        {
+                            "value": "birthday",
+                            "description": "生日包装"
+                        },
+                        {
+                            "value": "anniversary",
+                            "description": "纪念日包装"
+                        },
+                        {
+                            "value": "corporate",
+                            "description": "企业包装"
+                        }
+                    ]
+                },
+                {
+                    "name": "notes",
+                    "type": "TEXT",
+                    "description": "备注"
+                },
+                {
+                    "name": "created_at",
+                    "type": "TIMESTAMP",
+                    "description": "创建时间"
+                },
+                {
+                    "name": "updated_at",
+                    "type": "TIMESTAMP",
+                    "description": "更新时间"
+                }
+            ]
+        },
+        {
+            "name": "Customers",
+            "description": "顾客数据表",
+            "columns":
+            [
+                {
+                    "name": "customer_id",
+                    "type": "INT",
+                    "description": "顾客ID (主键)"
+                },
+                {
+                    "name": "membership_number",
+                    "type": "VARCHAR(20)",
+                    "description": "会员卡号"
+                },
+                {
+                    "name": "first_name",
+                    "type": "VARCHAR(50)",
+                    "description": "名"
+                },
+                {
+                    "name": "last_name",
+                    "type": "VARCHAR(50)",
+                    "description": "姓"
+                },
+                {
+                    "name": "gender",
+                    "type": "ENUM",
+                    "description": "性别",
+                    "values":
+                    [
+                        {
+                            "value": "male",
+                            "description": "男"
+                        },
+                        {
+                            "value": "female",
+                            "description": "女"
+                        },
+                        {
+                            "value": "non_binary",
+                            "description": "非二元"
+                        },
+                        {
+                            "value": "other",
+                            "description": "其他"
+                        },
+                        {
+                            "value": "prefer_not_to_say",
+                            "description": "不愿透露"
+                        }
+                    ]
+                },
+                {
+                    "name": "date_of_birth",
+                    "type": "DATE",
+                    "description": "出生日期"
+                },
+                {
+                    "name": "phone_number",
+                    "type": "VARCHAR(20)",
+                    "description": "电话号码"
+                },
+                {
+                    "name": "email",
+                    "type": "VARCHAR(100)",
+                    "description": "电子邮箱"
+                },
+                {
+                    "name": "password_hash",
+                    "type": "VARCHAR(255)",
+                    "description": "密码哈希(用于线上账户)"
+                },
+                {
+                    "name": "registration_date",
+                    "type": "DATE",
+                    "description": "注册日期"
+                },
+                {
+                    "name": "membership_level",
+                    "type": "ENUM",
+                    "description": "会员等级",
+                    "values":
+                    [
+                        {
+                            "value": "standard",
+                            "description": "标准"
+                        },
+                        {
+                            "value": "silver",
+                            "description": "银卡"
+                        },
+                        {
+                            "value": "gold",
+                            "description": "金卡"
+                        },
+                        {
+                            "value": "platinum",
+                            "description": "白金卡"
+                        },
+                        {
+                            "value": "diamond",
+                            "description": "钻石卡"
+                        },
+                        {
+                            "value": "vip",
+                            "description": "VIP"
+                        },
+                        {
+                            "value": "lifetime",
+                            "description": "终身会员"
+                        },
+                        {
+                            "value": "corporate",
+                            "description": "企业会员"
+                        },
+                        {
+                            "value": "student",
+                            "description": "学生会员"
+                        },
+                        {
+                            "value": "senior",
+                            "description": "老年会员"
+                        },
+                        {
+                            "value": "family",
+                            "description": "家庭会员"
+                        }
+                    ]
+                },
+                {
+                    "name": "membership_status",
+                    "type": "ENUM",
+                    "description": "会员状态",
+                    "values":
+                    [
+                        {
+                            "value": "active",
+                            "description": "活跃"
+                        },
+                        {
+                            "value": "inactive",
+                            "description": "不活跃"
+                        },
+                        {
+                            "value": "expired",
+                            "description": "过期"
+                        },
+                        {
+                            "value": "suspended",
+                            "description": "暂停"
+                        },
+                        {
+                            "value": "pending",
+                            "description": "待处理"
+                        },
+                        {
+                            "value": "cancelled",
+                            "description": "已取消"
+                        },
+                        {
+                            "value": "blacklisted",
+                            "description": "黑名单"
+                        }
+                    ]
+                },
+                {
+                    "name": "total_points",
+                    "type": "INT",
+                    "description": "积分总数"
+                },
+                {
+                    "name": "available_points",
+                    "type": "INT",
+                    "description": "可用积分"
+                },
+                {
+                    "name": "total_spending",
+                    "type": "DECIMAL(12,2)",
+                    "description": "累计消费金额"
+                },
+                {
+                    "name": "last_purchase_date",
+                    "type": "DATE",
+                    "description": "最近购买日期"
+                },
+                {
+                    "name": "preferred_payment_method",
+                    "type": "ENUM",
+                    "description": "偏好支付方式",
+                    "values":
+                    [
+                        {
+                            "value": "cash",
+                            "description": "现金"
+                        },
+                        {
+                            "value": "credit_card",
+                            "description": "信用卡"
+                        },
+                        {
+                            "value": "debit_card",
+                            "description": "借记卡"
+                        },
+                        {
+                            "value": "wechat_pay",
+                            "description": "微信支付"
+                        },
+                        {
+                            "value": "alipay",
+                            "description": "支付宝"
+                        },
+                        {
+                            "value": "apple_pay",
+                            "description": "Apple Pay"
+                        },
+                        {
+                            "value": "google_pay",
+                            "description": "Google Pay"
+                        },
+                        {
+                            "value": "bank_transfer",
+                            "description": "银行转账"
+                        },
+                        {
+                            "value": "store_credit",
+                            "description": "店铺信用"
+                        },
+                        {
+                            "value": "gift_card",
+                            "description": "礼品卡"
+                        }
+                    ]
+                },
+                {
+                    "name": "marketing_consent",
+                    "type": "BOOLEAN",
+                    "description": "营销同意"
+                },
+                {
+                    "name": "sms_notification",
+                    "type": "BOOLEAN",
+                    "description": "短信通知"
+                },
+                {
+                    "name": "email_notification",
+                    "type": "BOOLEAN",
+                    "description": "邮件通知"
+                },
+                {
+                    "name": "account_status",
+                    "type": "ENUM",
+                    "description": "账户状态",
+                    "values":
+                    [
+                        {
+                            "value": "active",
+                            "description": "活跃"
+                        },
+                        {
+                            "value": "inactive",
+                            "description": "不活跃"
+                        },
+                        {
+                            "value": "suspended",
+                            "description": "暂停"
+                        },
+                        {
+                            "value": "closed",
+                            "description": "关闭"
+                        },
+                        {
+                            "value": "pending_verification",
+                            "description": "待验证"
+                        },
+                        {
+                            "value": "locked",
+                            "description": "锁定"
+                        },
+                        {
+                            "value": "dormant",
+                            "description": "休眠"
+                        },
+                        {
+                            "value": "restricted",
+                            "description": "限制"
+                        }
+                    ]
+                },
+                {
+                    "name": "customer_type",
+                    "type": "ENUM",
+                    "description": "客户类型",
+                    "values":
+                    [
+                        {
+                            "value": "individual",
+                            "description": "个人"
+                        },
+                        {
+                            "value": "corporate",
+                            "description": "企业"
+                        },
+                        {
+                            "value": "wholesale",
+                            "description": "批发"
+                        },
+                        {
+                            "value": "employee",
+                            "description": "员工"
+                        },
+                        {
+                            "value": "affiliate",
+                            "description": "联盟"
+                        },
+                        {
+                            "value": "guest",
+                            "description": "访客"
+                        },
+                        {
+                            "value": "international",
+                            "description": "国际"
+                        }
+                    ]
+                },
+                {
+                    "name": "source",
+                    "type": "ENUM",
+                    "description": "客户来源",
+                    "values":
+                    [
+                        {
+                            "value": "in_store",
+                            "description": "店内"
+                        },
+                        {
+                            "value": "website",
+                            "description": "网站"
+                        },
+                        {
+                            "value": "mobile_app",
+                            "description": "移动应用"
+                        },
+                        {
+                            "value": "referral",
+                            "description": "推荐"
+                        },
+                        {
+                            "value": "social_media",
+                            "description": "社交媒体"
+                        },
+                        {
+                            "value": "promotion",
+                            "description": "促销"
+                        },
+                        {
+                            "value": "event",
+                            "description": "活动"
+                        },
+                        {
+                            "value": "partner",
+                            "description": "合作伙伴"
+                        },
+                        {
+                            "value": "advertising",
+                            "description": "广告"
+                        }
+                    ]
+                },
+                {
+                    "name": "shopping_frequency",
+                    "type": "ENUM",
+                    "description": "购物频率",
+                    "values":
+                    [
+                        {
+                            "value": "daily",
+                            "description": "每天"
+                        },
+                        {
+                            "value": "weekly",
+                            "description": "每周"
+                        },
+                        {
+                            "value": "biweekly",
+                            "description": "每两周"
+                        },
+                        {
+                            "value": "monthly",
+                            "description": "每月"
+                        },
+                        {
+                            "value": "quarterly",
+                            "description": "每季度"
+                        },
+                        {
+                            "value": "rarely",
+                            "description": "很少"
+                        },
+                        {
+                            "value": "first_time",
+                            "description": "首次"
+                        },
+                        {
+                            "value": "irregular",
+                            "description": "不定期"
+                        }
+                    ]
+                },
+                {
+                    "name": "default_address_id",
+                    "type": "INT",
+                    "description": "默认地址ID"
+                },
+                {
+                    "name": "notes",
+                    "type": "TEXT",
+                    "description": "客户备注"
+                },
+                {
+                    "name": "created_at",
+                    "type": "TIMESTAMP",
+                    "description": "创建时间"
+                },
+                {
+                    "name": "updated_at",
+                    "type": "TIMESTAMP",
+                    "description": "更新时间"
+                }
+            ]
+        },
+        {
+            "description": "库存数据表",
+            "name": "Inventory",
+            "columns":
+            [
+                {
+                    "name": "inventory_id",
+                    "type": "INT",
+                    "description": "库存记录ID (主键)"
+                },
+                {
+                    "name": "product_id",
+                    "type": "INT",
+                    "description": "商品ID (外键)"
+                },
+                {
+                    "name": "store_id",
+                    "type": "INT",
+                    "description": "门店ID (外键)"
+                },
+                {
+                    "name": "warehouse_id",
+                    "type": "INT",
+                    "description": "仓库ID (外键)"
+                },
+                {
+                    "name": "batch_number",
+                    "type": "VARCHAR(30)",
+                    "description": "批次号"
+                },
+                {
+                    "name": "quantity",
+                    "type": "INT",
+                    "description": "数量"
+                },
+                {
+                    "name": "available_quantity",
+                    "type": "INT",
+                    "description": "可用数量"
+                },
+                {
+                    "name": "reserved_quantity",
+                    "type": "INT",
+                    "description": "预留数量"
+                },
+                {
+                    "name": "damaged_quantity",
+                    "type": "INT",
+                    "description": "损坏数量"
+                },
+                {
+                    "name": "production_date",
+                    "type": "DATE",
+                    "description": "生产日期"
+                },
+                {
+                    "name": "expiry_date",
+                    "type": "DATE",
+                    "description": "过期日期"
+                },
+                {
+                    "name": "purchase_order_id",
+                    "type": "INT",
+                    "description": "采购订单ID (外键)"
+                },
+                {
+                    "name": "purchase_price",
+                    "type": "DECIMAL(10,2)",
+                    "description": "采购价格"
+                },
+                {
+                    "name": "supplier_id",
+                    "type": "INT",
+                    "description": "供应商ID (外键)"
+                },
+                {
+                    "name": "receiving_date",
+                    "type": "DATE",
+                    "description": "入库日期"
+                },
+                {
+                    "name": "shelf_life_days",
+                    "type": "INT",
+                    "description": "保质期天数"
+                },
+                {
+                    "name": "storage_location",
+                    "type": "VARCHAR(50)",
+                    "description": "存储位置"
+                },
+                {
+                    "name": "storage_condition",
+                    "type": "VARCHAR(100)",
+                    "description": "存储条件"
+                },
+                {
+                    "name": "last_count_date",
+                    "type": "DATE",
+                    "description": "最近盘点日期"
+                },
+                {
+                    "name": "last_count_quantity",
+                    "type": "INT",
+                    "description": "最近盘点数量"
+                },
+                {
+                    "name": "stock_status",
+                    "type": "ENUM",
+                    "description": "库存状态",
+                    "values":
+                    [
+                        {
+                            "value": "normal",
+                            "description": "正常"
+                        },
+                        {
+                            "value": "low",
+                            "description": "低库存"
+                        },
+                        {
+                            "value": "critical",
+                            "description": "紧急库存"
+                        },
+                        {
+                            "value": "out_of_stock",
+                            "description": "缺货"
+                        },
+                        {
+                            "value": "overstock",
+                            "description": "库存过多"
+                        },
+                        {
+                            "value": "reserved",
+                            "description": "预留"
+                        },
+                        {
+                            "value": "damaged",
+                            "description": "损坏"
+                        },
+                        {
+                            "value": "expired",
+                            "description": "过期"
+                        },
+                        {
+                            "value": "recalled",
+                            "description": "召回"
+                        },
+                        {
+                            "value": "in_transit",
+                            "description": "运输中"
+                        },
+                        {
+                            "value": "on_hold",
+                            "description": "暂停"
+                        }
+                    ]
+                },
+                {
+                    "name": "inventory_type",
+                    "type": "ENUM",
+                    "description": "库存类型",
+                    "values":
+                    [
+                        {
+                            "value": "regular",
+                            "description": "常规"
+                        },
+                        {
+                            "value": "seasonal",
+                            "description": "季节性"
+                        },
+                        {
+                            "value": "promotional",
+                            "description": "促销"
+                        },
+                        {
+                            "value": "clearance",
+                            "description": "清仓"
+                        },
+                        {
+                            "value": "display",
+                            "description": "展示"
+                        },
+                        {
+                            "value": "sample",
+                            "description": "样品"
+                        },
+                        {
+                            "value": "return",
+                            "description": "退货"
+                        },
+                        {
+                            "value": "defective",
+                            "description": "有缺陷"
+                        },
+                        {
+                            "value": "gift_with_purchase",
+                            "description": "购买赠品"
+                        }
+                    ]
+                },
+                {
+                    "name": "movement_status",
+                    "type": "ENUM",
+                    "description": "移动状态",
+                    "values":
+                    [
+                        {
+                            "value": "received",
+                            "description": "已接收"
+                        },
+                        {
+                            "value": "stored",
+                            "description": "已存储"
+                        },
+                        {
+                            "value": "picked",
+                            "description": "已拣货"
+                        },
+                        {
+                            "value": "packed",
+                            "description": "已打包"
+                        },
+                        {
+                            "value": "shipped",
+                            "description": "已发货"
+                        },
+                        {
+                            "value": "transferred",
+                            "description": "已转移"
+                        },
+                        {
+                            "value": "returned",
+                            "description": "已退回"
+                        },
+                        {
+                            "value": "disposed",
+                            "description": "已处理"
+                        },
+                        {
+                            "value": "adjusted",
+                            "description": "已调整"
+                        },
+                        {
+                            "value": "reserved",
+                            "description": "已预留"
+                        }
+                    ]
+                },
+                {
+                    "name": "quality_check_status",
+                    "type": "ENUM",
+                    "description": "质检状态",
+                    "values":
+                    [
+                        {
+                            "value": "pending",
+                            "description": "待处理"
+                        },
+                        {
+                            "value": "passed",
+                            "description": "通过"
+                        },
+                        {
+                            "value": "failed",
+                            "description": "失败"
+                        },
+                        {
+                            "value": "conditional_pass",
+                            "description": "有条件通过"
+                        },
+                        {
+                            "value": "needs_inspection",
+                            "description": "需要检查"
+                        },
+                        {
+                            "value": "quarantined",
+                            "description": "隔离"
+                        },
+                        {
+                            "value": "approved",
+                            "description": "已批准"
+                        },
+                        {
+                            "value": "rejected",
+                            "description": "已拒绝"
+                        }
+                    ]
+                },
+                {
+                    "name": "reorder_status",
+                    "type": "ENUM",
+                    "description": "重新订购状态",
+                    "values":
+                    [
+                        {
+                            "value": "no_action",
+                            "description": "无动作"
+                        },
+                        {
+                            "value": "review_needed",
+                            "description": "需要审核"
+                        },
+                        {
+                            "value": "ordered",
+                            "description": "已订购"
+                        },
+                        {
+                            "value": "partially_ordered",
+                            "description": "部分订购"
+                        },
+                        {
+                            "value": "backorder",
+                            "description": "缺货订单"
+                        },
+                        {
+                            "value": "discontinued",
+                            "description": "已下架"
+                        }
+                    ]
+                },
+                {
+                    "name": "notes",
+                    "type": "TEXT",
+                    "description": "备注"
+                },
+                {
+                    "name": "created_at",
+                    "type": "TIMESTAMP",
+                    "description": "创建时间"
+                },
+                {
+                    "name": "updated_at",
+                    "type": "TIMESTAMP",
+                    "description": "更新时间"
+                }
+            ]
+        }
+    ]
+}

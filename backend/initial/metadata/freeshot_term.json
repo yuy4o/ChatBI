@@ -1,0 +1,30 @@
+{
+  "freeshots": [
+    {
+      "id": "fs_001",
+      "name": "今天的播放量",
+      "content": "SELECT COUNT(*) FROM video_play_logs WHERE dt='2023-05-19'",
+      "likes": 0
+    },
+    {
+      "id": "fs_002",
+      "name": "最近一周的播放量",
+      "content": "SELECT COUNT(*) FROM video_play_logs WHERE dt>='2023-05-12' and dt<='2023-05-19'",
+      "likes": 0
+    }
+  ],
+  "terms": [
+    {
+      "id": "term_001",
+      "name": "高级用户",
+      "content": "一般指等级大于3的用户",
+      "likes": 0
+    },
+    {
+      "id": "term_002",
+      "name": "普通用户",
+      "content": "一般指等级大于1的用户",
+      "likes": 0
+    }
+  ]
+}

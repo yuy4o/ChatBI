@@ -1,0 +1,9 @@
+# 直接依赖项
+flask
+flask-cors
+flask-socketio
+flasgger
+openai
+chromadb
+numpy
+requests

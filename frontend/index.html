@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据表精简系统</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="search-container">
+                    <input type="text" id="metadataSearch" placeholder="搜索元数据..." class="search-input">
+                </div>
+                <button id="toggleBtn" class="toggle-btn">隐藏非高亮元素</button>
+                <div class="tip">提示：右键点击元素可手动高亮/取消高亮</div>
+            </div>
+            <div class="tree-container" id="databaseTree"></div>
+        </div>
+        <div class="main-content">
+            <div class="chat-container">
+                <div class="chat-header">
+                    <h2>工作台</h2>
+                </div>
+                <div class="chat-messages" id="chatMessages">
+                    <!-- 消息将在这里动态添加 -->
+                </div>
+                <div class="chat-input-container">
+                    <textarea id="userInput" placeholder="请输入您的需求..."></textarea>
+                    <button id="sendBtn" class="send-btn">发送</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 日志面板 -->
+    <div id="logPanel" class="log-panel">
+        <div class="log-header">
+            <h3>系统日志</h3>
+        </div>
+        <div id="logContent" class="log-content"></div>
+    </div>
+    <button id="logToggleBtn" class="log-toggle-btn">查看日志</button>
+    
+    <!-- 引入模块化的JavaScript文件 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <script type="module" src="script.js"></script>
+    <script type="module" src="logs.js"></script>
+    <script type="module" src="config.js"></script>
+    <script type="module" src="management.js"></script>
+</body>
+</html>
