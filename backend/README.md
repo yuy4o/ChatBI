@@ -36,9 +36,6 @@ python -m venv venv
 
 # Windows
 venv\Scripts\activate
-
-# Linux/Mac
-source venv/bin/activate
 ```
 
 3. 安装依赖包

@@ -1,6 +1,3 @@
-// 导入Socket.IO客户端
-import { io } from './node_modules/socket.io-client/dist/socket.io.esm.min.js';
-
 // 全局变量
 let logSocket = null; // Socket.IO连接
 let isLogPanelOpen = true; // 日志面板默认展开
