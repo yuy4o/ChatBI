@@ -1,6 +1,8 @@
 // 全局变量
 let logSocket = null; // Socket.IO连接
 let isLogPanelOpen = true; // 日志面板默认展开
+let autoCloseTimer = null; // 自动关闭计时器
+let lastMessageTime = null; // 最后一条消息的接收时间
 
 // DOM元素引用
 let logPanel;
@@ -50,6 +52,17 @@ function initWebSocket() {
     // 接收日志消息事件
     logSocket.on('log', (data) => {
         try {
+            // 更新最后一条消息的接收时间
+            lastMessageTime = new Date();
+            
+            // 自动展开日志面板
+            if (!isLogPanelOpen) {
+                openLogPanel();
+            }
+            
+            // 重置自动关闭计时器
+            resetAutoCloseTimer();
+            
             // 检查是否有summary字段
             if (data.summary) {
                 addLogMessage(data.type, data.message, data.summary);
@@ -77,6 +90,39 @@ function initWebSocket() {
     logSocket.on('disconnect', (reason) => {
         addLogMessage('系统日志', 'Socket.IO连接已断开: ' + reason);
     });
+}
+
+// 重置自动关闭计时器
+function resetAutoCloseTimer() {
+    // 清除之前的计时器
+    if (autoCloseTimer) {
+        clearTimeout(autoCloseTimer);
+    }
+    
+    // 设置新的计时器，3秒后自动关闭日志面板
+    autoCloseTimer = setTimeout(() => {
+        // 只有在没有新消息的情况下才关闭
+        const now = new Date();
+        if (lastMessageTime && (now - lastMessageTime) >= 5000) {
+            closeLogPanel();
+        }
+    }, 3000);
+}
+
+// 打开日志面板
+function openLogPanel() {
+    isLogPanelOpen = true;
+    logPanel.classList.add('open');
+    logToggleBtn.textContent = '关闭日志';
+    // 移除新日志提示
+    logToggleBtn.classList.remove('has-new-logs');
+}
+
+// 关闭日志面板
+function closeLogPanel() {
+    isLogPanelOpen = false;
+    logPanel.classList.remove('open');
+    logToggleBtn.textContent = '查看日志';
 }
 
 // 添加日志消息到面板
@@ -147,14 +193,17 @@ function toggleLogPanel() {
     
     if (isLogPanelOpen) {
         // 打开日志面板
-        logPanel.classList.add('open');
-        logToggleBtn.textContent = '关闭日志';
-        // 移除新日志提示
-        logToggleBtn.classList.remove('has-new-logs');
+        openLogPanel();
+        // 重置自动关闭计时器
+        resetAutoCloseTimer();
     } else {
         // 关闭日志面板
-        logPanel.classList.remove('open');
-        logToggleBtn.textContent = '查看日志';
+        closeLogPanel();
+        // 清除自动关闭计时器
+        if (autoCloseTimer) {
+            clearTimeout(autoCloseTimer);
+            autoCloseTimer = null;
+        }
     }
 }
 
