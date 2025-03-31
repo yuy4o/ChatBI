@@ -12,7 +12,7 @@ from initial.config import init_config_db
 import random
 import time
 from flasgger import Swagger
-from services.logger import socketio, handle_log_post, broadcast_log
+from services.logger import socketio, handle_log_post, broadcast_log, broadcast_stream_log
 
 app = Flask(__name__)
 CORS(app)

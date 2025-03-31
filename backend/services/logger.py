@@ -50,6 +50,36 @@ def broadcast_log(log_type, message, summary=""):
     
     return log_data
 
+# 流式日志广播函数
+def broadcast_stream_log(log_type, token, summary="", is_first=False):
+    """
+    广播流式日志消息到所有连接的WebSocket客户端
+    
+    Args:
+        log_type (str): 日志类型 ('system' 或 'ai')
+        token (str): 单个token内容
+        summary (str, optional): 日志消息的摘要。默认为空字符串。
+        is_first (bool, optional): 是否是流式输出的第一个token。默认为False。
+    """
+    timestamp = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+    log_data = {
+        "type": log_type,
+        "message": token,
+        "timestamp": timestamp,
+        "summary": summary,
+        "is_stream": True,
+        "is_first": is_first
+    }
+    
+    # 发送到所有连接的客户端
+    socketio.emit('stream_log', log_data)
+    
+    # 打印到服务器控制台进行调试
+    if is_first:
+        print(f"[{timestamp}] [{log_type}] 开始流式输出: {summary}")
+    
+    return log_data
+
 # HTTP route handler (to be registered in app.py)
 def handle_log_post():
     """

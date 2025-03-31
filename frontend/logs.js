@@ -75,6 +75,28 @@ function initWebSocket() {
         }
     });
     
+    // 接收流式日志消息事件
+    logSocket.on('stream_log', (data) => {
+        try {
+            // 更新最后一条消息的接收时间
+            lastMessageTime = new Date();
+            
+            // 自动展开日志面板
+            if (!isLogPanelOpen) {
+                openLogPanel();
+            }
+            
+            // 重置自动关闭计时器
+            resetAutoCloseTimer();
+            
+            // 处理流式日志
+            handleStreamLog(data);
+        } catch (error) {
+            console.error('处理流式日志消息失败:', error);
+            addLogMessage('系统日志', `接收到未知格式的流式消息`);
+        }
+    });
+    
     // 重新连接事件
     logSocket.on('reconnect_attempt', () => {
         addLogMessage('系统日志', '正在尝试重新连接...');
@@ -185,6 +207,9 @@ function addLogMessage(type, message, summary = null) {
     if (!isLogPanelOpen) {
         logToggleBtn.classList.add('has-new-logs');
     }
+    
+    // 返回创建的日志项，以便其他函数可以引用
+    return logItem;
 }
 
 // 切换日志面板显示/隐藏
@@ -236,6 +261,43 @@ async function sendLog(type, message, summary = null) {
         addLogMessage('系统日志', `发送日志失败: ${error.message}`);
         return false;
     }
+}
+
+// 处理流式日志消息
+let currentStreamLogItem = null;
+let currentStreamSummary = null;
+
+function handleStreamLog(data) {
+    // 如果是流式输出的第一个token，创建新的日志项
+    if (data.is_first) {
+        currentStreamLogItem = addLogMessage(data.type, data.message, data.summary);
+        currentStreamSummary = data.summary;
+        
+        // 创建或获取消息内容元素
+        let messageContent = currentStreamLogItem.querySelector('.log-message');
+        if (!messageContent) {
+            messageContent = document.createElement('span');
+            messageContent.className = 'log-message';
+            currentStreamLogItem.appendChild(messageContent);
+        }
+        
+        // 初始化内容
+        messageContent.textContent = data.message;
+    } else if (currentStreamLogItem) {
+        // 获取消息内容元素
+        const messageContent = currentStreamLogItem.querySelector('.log-message');
+        if (messageContent) {
+            // 追加新的token
+            messageContent.textContent += data.message;
+        }
+    } else {
+        // 如果没有当前流式日志项，创建一个新的
+        currentStreamLogItem = addLogMessage(data.type, data.message, data.summary);
+        currentStreamSummary = data.summary;
+    }
+    
+    // 滚动到底部
+    logContent.scrollTop = logContent.scrollHeight;
 }
 
 // 导出函数供其他模块使用
