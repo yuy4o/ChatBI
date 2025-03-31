@@ -19,10 +19,16 @@ const userInput = document.getElementById('userInput');
 const sendBtn = document.getElementById('sendBtn');
 const metadataSearch = document.getElementById('metadataSearch');
 
+// 导入推荐问题模块
+import { createRecommendedQuestionsMessage } from './recommended-questions.js';
+
 // 初始化
 document.addEventListener('DOMContentLoaded', () => {
     // 加载数据库列表
     loadDatabases();
+    
+    // 显示推荐问题
+    createRecommendedQuestionsMessage();
     
     // 绑定事件
     toggleBtn.addEventListener('click', toggleNonHighlightedItems);

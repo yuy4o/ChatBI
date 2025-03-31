@@ -55,7 +55,7 @@ def execute_query(db: str, sql: str, params: Optional[Union[Tuple, List, Dict]] 
             cursor.execute(sql)
         
         # Determine the type of query
-        if sql.strip().upper().startswith(('SELECT', 'PRAGMA')):
+        if sql.strip().upper().startswith(('SELECT', 'PRAGMA', 'WITH')):
             # For SELECT queries, return the results
             if fetch_all:
                 rows = cursor.fetchall()

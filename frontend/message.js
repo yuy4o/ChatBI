@@ -553,7 +553,7 @@ async function fetchAndDisplayTerm(schema) {
  */
 async function fetchAndDisplaySQL(schema) {
     // 创建加载中消息
-    const loadingMessage = createLoadingMessage('正在生成SQL');
+    const loadingMessage = createLoadingMessage('推理中');
     document.getElementById('chatMessages').appendChild(loadingMessage);
     document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
     

@@ -135,7 +135,8 @@ class SQLAgent:
                     model=get_model(),
                     messages=self.messages,
                     tools=[{"type": "function", "function": func} for func in functions],
-                    tool_choice="auto"
+                    tool_choice="auto",
+                    temperature=0
                 )
                 
                 # 获取响应

@@ -103,7 +103,7 @@ table3""")
         prompt_parts.append(f"## 附加信息\n今天日期{now.strftime('%Y-%m-%d %A')} 当前时间{now.strftime('%H:%M')}\n")
         
         # Add user query
-        prompt_parts.append(f"## 元数据信息（注意，以下是部分表的部分字段信息）\n{metadata_content}\n")
+        prompt_parts.append(f"## 元数据信息（注意，以下是部分表的部分字段信息，枚举值也是其部分枚举值）\n{metadata_content}\n")
         
         # Add task instructions for ReAct paradigm
         prompt_parts.append("""## 任务
@@ -121,6 +121,8 @@ table3""")
 3. 如果发现元数据不能满足用户需求，请向用户说明，寻求用户提供更多信息
 4. 尽可能一次查询就能解决用户问题，如果问题较为复杂可以使用多次子查询
 5. 使用with as语句用来增加复杂sql的可读性
+6. 不要sql中加入--备注
+7. 当前DDL语句中的信息，包括表、字段、枚举值都是根据用户问题搜索到的，只是其中一部分，如果不能满足用户需求，需要拿到完整的表信息再做判断
 
 请思考用户的真实需求，生成准确的SQL，并确保SQL可以成功执行。如果执行失败，请分析原因并修正。
 请先思考用户需求，然后生成SQL并执行。最后，提供一个清晰的回答，包括SQL和执行结果的解释。""")

@@ -26,7 +26,7 @@ class SQLExecutor:
             result = execute_query('data', sql)
             
             # 如果是SELECT查询，格式化结果
-            if sql.strip().upper().startswith('SELECT'):
+            if sql.strip().upper().startswith(('SELECT', 'WITH')):
                 # 如果指定了limit，限制结果数量
                 if limit is not None:
                     result = result[:limit]

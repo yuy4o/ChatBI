@@ -26,44 +26,34 @@ class SQLTools:
         try:
             # 执行查询
             result = execute_query('data', sql)
-            
-            # 如果是SELECT查询，格式化结果
-            if sql.strip().upper().startswith('SELECT'):
-                # 限制结果最多10条
-                result = result[:10]
-                
-                # 获取列名和类型
-                columns = []
-                if result and len(result) > 0:
-                    first_row = result[0]
-                    for col_name in first_row.keys():
-                        # 简单推断类型
-                        col_type = SQLTools._infer_column_type(first_row[col_name])
-                        columns.append({
-                            "name": col_name,
-                            "type": col_type,
-                            "nullable": True  # 默认可为空
-                        })
-                
-                # 转换数据为二维数组
-                data = []
-                for row in result:
-                    data_row = [row[col["name"]] for col in columns]
-                    data.append(data_row)
-                
-                return json.dumps({
-                    "success": True,
-                    "columns": columns,
-                    "data": data,
-                    "totalRows": len(result)
-                }, ensure_ascii=False)
-            else:
-                # 非SELECT查询，返回影响的行数
-                return json.dumps({
-                    "success": True,
-                    "affectedRows": result if isinstance(result, int) else 0,
-                    "message": f"查询执行成功，影响了 {result if isinstance(result, int) else 0} 行数据"
-                }, ensure_ascii=False)
+            # 限制结果最多10条
+            result = result[:10]
+
+            # 获取列名和类型
+            columns = []
+            if result and len(result) > 0:
+                first_row = result[0]
+                for col_name in first_row.keys():
+                    # 简单推断类型
+                    col_type = SQLTools._infer_column_type(first_row[col_name])
+                    columns.append({
+                        "name": col_name,
+                        "type": col_type,
+                        "nullable": True  # 默认可为空
+                    })
+
+            # 转换数据为二维数组
+            data = []
+            for row in result:
+                data_row = [row[col["name"]] for col in columns]
+                data.append(data_row)
+
+            return json.dumps({
+                "success": True,
+                "columns": columns,
+                "data": data,
+                "totalRows": len(result)
+            }, ensure_ascii=False)
         
         except DatabaseError as e:
             # 处理数据库错误
@@ -229,10 +219,6 @@ class SQLTools:
                 ddl += f" COMMENT = '{full_comment}'"
             
             ddl += ";"
-            
-            # 关闭数据库连接
-            cursor.close()
-            conn.close()
             
             # 返回DDL字符串
             return ddl
