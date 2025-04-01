@@ -19,45 +19,7 @@ def load_default_configs() -> List[Dict[str, str]]:
         with open(CONFIG_JSON_PATH, 'r', encoding='utf-8') as f:
             return json.load(f)
     except Exception as e:
-        print(f"加载配置文件失败: {str(e)}，使用内置默认配置")
-        # 如果配置文件不存在或读取失败，返回内置的默认配置
-        return [
-            {
-                "key": "llm_api_key",
-                "value": "02fb5cc3-e828-436e-a1b6-c114916c15c6",
-                "name": "大模型API密钥"
-            },
-            {
-                "key": "llm_base_url",
-                "value": "https://ark.cn-beijing.volces.com/api/v3",
-                "name": "大模型接入点"
-            },
-            {
-                "key": "llm_model",
-                "value": "deepseek-v3-250324",
-                "name": "大模型名称"
-            },
-            {
-                "key": "llm_timeout",
-                "value": "1800",
-                "name": "大模型超时时间(秒)"
-            },
-            {
-                "key": "embedding_api_key",
-                "value": "02fb5cc3-e828-436e-a1b6-c114916c15c6",
-                "name": "向量化API密钥"
-            },
-            {
-                "key": "embedding_api_url",
-                "value": "https://ark.cn-beijing.volces.com/api/v3/embeddings",
-                "name": "向量化接入点"
-            },
-            {
-                "key": "embedding_model",
-                "value": "doubao-embedding-text-240715",
-                "name": "向量化模型名称"
-            }
-        ]
+        print(f"加载配置文件失败: {str(e)}")
 
 def init_config_db():
     """
@@ -206,29 +168,10 @@ def get_llm_config() -> Dict[str, Any]:
                 llm_config["model"] = config["value"]
             elif config["key"] == "llm_timeout":
                 llm_config["timeout"] = int(config["value"])
-        
-        # 确保所有必要的配置都存在
-        if not all(k in llm_config for k in ["api_key", "base_url", "model", "timeout"]):
-            # 如果缺少某些配置，使用默认值
-            if "api_key" not in llm_config:
-                llm_config["api_key"] = "02fb5cc3-e828-436e-a1b6-c114916c15c6"
-            if "base_url" not in llm_config:
-                llm_config["base_url"] = "https://ark.cn-beijing.volces.com/api/v3"
-            if "model" not in llm_config:
-                llm_config["model"] = "deepseek-v3-250324"
-            if "timeout" not in llm_config:
-                llm_config["timeout"] = 1800
-        
         return llm_config
     except Exception as e:
         # 出错时返回默认配置
-        print(f"获取LLM配置失败，使用默认配置: {str(e)}")
-        return {
-            "api_key": "02fb5cc3-e828-436e-a1b6-c114916c15c6",
-            "base_url": "https://ark.cn-beijing.volces.com/api/v3",
-            "model": "deepseek-v3-250324",
-            "timeout": 1800
-        }
+        print(f"获取LLM配置失败: {str(e)}")
 
 def get_embedding_config() -> Dict[str, Any]:
     """
@@ -249,23 +192,9 @@ def get_embedding_config() -> Dict[str, Any]:
                 embedding_config["api_url"] = config["value"]
             elif config["key"] == "embedding_model":
                 embedding_config["model"] = config["value"]
-        
-        # 确保所有必要的配置都存在
-        if not all(k in embedding_config for k in ["api_key", "api_url", "model"]):
-            # 如果缺少某些配置，使用默认值
-            if "api_key" not in embedding_config:
-                embedding_config["api_key"] = "02fb5cc3-e828-436e-a1b6-c114916c15c6"
-            if "api_url" not in embedding_config:
-                embedding_config["api_url"] = "https://ark.cn-beijing.volces.com/api/v3/embeddings"
-            if "model" not in embedding_config:
-                embedding_config["model"] = "doubao-embedding-text-240715"
+
         
         return embedding_config
     except Exception as e:
         # 出错时返回默认配置
-        print(f"获取向量嵌入配置失败，使用默认配置: {str(e)}")
-        return {
-            "api_key": "02fb5cc3-e828-436e-a1b6-c114916c15c6",
-            "api_url": "https://ark.cn-beijing.volces.com/api/v3/embeddings",
-            "model": "doubao-embedding-text-240715"
-        }
+        print(f"获取向量嵌入配置失败: {str(e)}")

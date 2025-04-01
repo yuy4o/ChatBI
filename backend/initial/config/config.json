@@ -1,7 +1,7 @@
 [
     {
         "key": "llm_api_key",
-        "value": "02fb5cc3-e828-436e-a1b6-c114916c15c6",
+        "value": "ee27bcd9-26d5-41c1-b47b-af78c71b7561",
         "name": "大模型API密钥"
     },
     {
@@ -21,7 +21,7 @@
     },
     {
         "key": "embedding_api_key",
-        "value": "02fb5cc3-e828-436e-a1b6-c114916c15c6",
+        "value": "ee27bcd9-26d5-41c1-b47b-af78c71b7561",
         "name": "向量化API密钥"
     },
     {
