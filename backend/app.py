@@ -15,9 +15,9 @@ from flasgger import Swagger
 from services.logger import socketio, handle_log_post, broadcast_log, broadcast_stream_log
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/api/*": {"origins": "http://localhost:8001"}})
 Swagger(app)
-socketio.init_app(app)
+socketio.init_app(app, cors_allowed_origins="*")
 
 from utils.mock_data_generator import generate_mock_data
 
@@ -667,4 +667,4 @@ def log_api():
 
 if __name__ == '__main__':    
     # 使用socketio运行应用
-    socketio.run(app, debug=True, allow_unsafe_werkzeug=True)
+    socketio.run(app, host='0.0.0.0', port=5000, debug=True, allow_unsafe_werkzeug=True)

@@ -3,6 +3,5 @@
 /backend/.idea/
 /backend/.vscode/
 /backend/*.db
-/node_modules/
 /frontend/node_modules/
 /venv/

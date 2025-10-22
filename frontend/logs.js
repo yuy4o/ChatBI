@@ -37,7 +37,7 @@ function initWebSocket() {
     }
     
     // 创建新的Socket.IO连接
-    logSocket = io('http://localhost:5000', {
+    logSocket = io('http://172.29.83,147:5000', {
         path: '/socket.io',
         reconnection: true,
         reconnectionDelay: 5000,
